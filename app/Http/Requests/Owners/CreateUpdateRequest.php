@@ -5,6 +5,7 @@ namespace App\Http\Requests\Owners;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CreateUpdateRequest extends FormRequest
 {
@@ -25,9 +26,14 @@ class CreateUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'type_document'     =>  'required|string|in:CC,CE,NIT,OTRO',
-            'document'          =>  'required|string|max:20|unique:owners',
+            'document'          =>  [
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('owners')->ignore($this->owner)
+            ],
 
             'first_name'        =>  'required|string|max:50',
             'middle_name'       =>  'required|string|max:50',
@@ -37,11 +43,5 @@ class CreateUpdateRequest extends FormRequest
             'phone'             =>  'required|string|max:20',
             'city'              =>  'required|string|max:100',
         ];
-
-        if (Request::isMethod('PUT') || Request::isMethod('PATCH')) {
-            $rules['document'] = $rules['document'] . ',id,' . $this->route('owner');
-        }
-
-        return $rules;
     }
 }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Requests\Drivers\CreateUpdateRequest;
 use App\Http\Resources\DriverResource;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 
-class DriverController extends Controller
+class DriverController extends BaseController
 {
     /**
      * Display a listing of the resource.

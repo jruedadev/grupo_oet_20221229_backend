@@ -4,6 +4,7 @@ namespace App\Http\Requests\Drivers;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CreateUpdateRequest extends FormRequest
 {
@@ -25,7 +26,21 @@ class CreateUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'type_document'     =>  'required|string|in:CC,CE,NIT,OTRO',
+            'document'          =>  [
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('drivers')->ignore($this->driver)
+            ],
+
+            'first_name'        =>  'required|string|max:50',
+            'middle_name'       =>  'required|string|max:50',
+            'last_name'         =>  'required|string|max:50',
+
+            'address'           =>  'required|string|max:250',
+            'phone'             =>  'required|string|max:20',
+            'city'              =>  'required|string|max:100',
         ];
     }
 }
