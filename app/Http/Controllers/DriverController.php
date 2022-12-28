@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Drivers\CreateUpdateRequest;
+use App\Http\Resources\DriverResource;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,10 @@ class DriverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $per_page = ($request->per_page) ? $request->per_page : 15;
+        return $this->sendResponse(Driver::paginate($per_page), "Drivers per page Obtained successfully");
     }
 
     /**
@@ -23,9 +26,10 @@ class DriverController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUpdateRequest $request)
     {
-        //
+        $driver = Driver::create($request->all());
+        return $this->sendResponse(new DriverResource($driver), 'Driver created successfully.');
     }
 
     /**
@@ -36,7 +40,7 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
-        //
+        return $this->sendResponse(new DriverResource($driver), 'Driver retrieved successfully.');
     }
 
     /**
@@ -48,7 +52,9 @@ class DriverController extends Controller
      */
     public function update(Request $request, Driver $driver)
     {
-        //
+        $driver->fill($request->all());
+        $driver->save();
+        return $this->sendResponse(new DriverResource($driver), 'Driver retrieved successfully.');
     }
 
     /**
@@ -59,6 +65,7 @@ class DriverController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        //
+        $driver->delete();
+        return $this->sendResponse([], 'Driver deleted successfully.');
     }
 }

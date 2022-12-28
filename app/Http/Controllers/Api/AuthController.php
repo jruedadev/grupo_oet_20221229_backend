@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     /**
      * Register api
@@ -35,8 +34,6 @@ class AuthController extends Controller
         $success['name'] =  $user->name;
         return $this->sendResponse($success, 'User register successfully.');
     }
-
-
 
     /**
      * Login api

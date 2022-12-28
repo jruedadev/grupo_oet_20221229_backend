@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Requests\Vehicles\CreateUpdateRequest;
+use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VehicleController extends BaseController
 {
@@ -13,9 +16,10 @@ class VehicleController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return 
+        $per_page = ($request->per_page) ? $request->per_page : 15;
+        return $this->sendResponse(Vehicle::paginate($per_page), "Vehicles per page Obtained successfully");
     }
 
     /**
@@ -24,9 +28,10 @@ class VehicleController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUpdateRequest $request)
     {
-        //
+        $vehicle = Vehicle::create($request->all());
+        return $this->sendResponse(new VehicleResource($vehicle), 'Vehicle created successfully.');
     }
 
     /**
@@ -37,7 +42,7 @@ class VehicleController extends BaseController
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        return $this->sendResponse(new VehicleResource($vehicle), 'Vehicle retrieved successfully.');
     }
 
     /**
@@ -47,9 +52,11 @@ class VehicleController extends BaseController
      * @param  \App\Models\\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(CreateUpdateRequest $request, Vehicle $vehicle)
     {
-        //
+        $vehicle->fill($request->all());
+        $vehicle->save();
+        return $this->sendResponse(new VehicleResource($vehicle), 'Vehicle retrieved successfully.');
     }
 
     /**
@@ -60,6 +67,7 @@ class VehicleController extends BaseController
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+        return $this->sendResponse([], 'Vehicle deleted successfully.');
     }
 }
