@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\BaseController;
-use App\Models\Vehicle;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 
-class VehicleController extends BaseController
+class OwnerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class VehicleController extends BaseController
      */
     public function index()
     {
-        return 
+        //
     }
 
     /**
@@ -32,10 +31,10 @@ class VehicleController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\\Vehicle  $vehicle
+     * @param  \App\Models\Owner  $owner
      * @return \Illuminate\Http\Response
      */
-    public function show(Vehicle $vehicle)
+    public function show(Owner $owner)
     {
         //
     }
@@ -44,10 +43,10 @@ class VehicleController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\\Vehicle  $vehicle
+     * @param  \App\Models\Owner  $owner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(Request $request, Owner $owner)
     {
         //
     }
@@ -55,10 +54,10 @@ class VehicleController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\\Vehicle  $vehicle
+     * @param  \App\Models\Owner  $owner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy(Owner $owner)
     {
         //
     }
