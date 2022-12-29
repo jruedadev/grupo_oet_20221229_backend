@@ -19,4 +19,9 @@ class Owner extends Model
         'phone',
         'city',
     ];
+
+    public function vehicle()
+    {
+        return $this->hasOne('App\Models\Vehicle');
+    }
 }
