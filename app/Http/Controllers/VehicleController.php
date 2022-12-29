@@ -18,7 +18,7 @@ class VehicleController extends BaseController
      */
     public function index(Request $request)
     {
-        return response()->json(Vehicle::with('owner')->all(), 200);
+        return response()->json(Vehicle::with('owner')->get(), 200);
     }
 
     /**

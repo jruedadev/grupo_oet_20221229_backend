@@ -17,7 +17,7 @@ class DriverController extends BaseController
      */
     public function index(Request $request)
     {
-        return response()->json(Driver::all(), 200);
+        return response()->json(Driver::get(), 200);
     }
 
     /**
