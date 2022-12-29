@@ -16,4 +16,14 @@ class Vehicle extends Model
         'type',
         'owner_id',
     ];
+
+    public function owner()
+    {
+        return $this->hasOne('App\Models\Owner');
+    }
+
+    public function getTypeAttribute()
+    {
+        return ($this->type === "private") ? "Privado" : "Público";
+    }
 }
