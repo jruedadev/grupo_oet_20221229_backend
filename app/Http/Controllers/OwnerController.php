@@ -17,7 +17,7 @@ class OwnerController extends BaseController
      */
     public function index(Request $request)
     {
-        return response()->json(Owner::get(), 200);
+        return response()->json(Owner::with('vehicle')->get(), 200);
     }
 
     /**
