@@ -30,7 +30,7 @@ class DriverController extends BaseController
     {
         $driver = Driver::create($request->all());
         if (!empty($request->vehicles)) {
-            $driver->vehicles->sync($request->vehicles);
+            $driver->vehicles()->sync($request->vehicles);
         }
         return $this->sendResponse(new DriverResource($driver), 'Driver created successfully.');
     }
@@ -58,7 +58,7 @@ class DriverController extends BaseController
         $driver->fill($request->all());
         $driver->save();
         if (!empty($request->vehicles)) {
-            $driver->vehicles->sync($request->vehicles);
+            $driver->vehicles()->sync($request->vehicles);
         }
         return $this->sendResponse(new DriverResource($driver), 'Driver retrieved successfully.');
     }
