@@ -19,7 +19,7 @@ class Vehicle extends Model
 
     public function owner()
     {
-        return $this->hasOne('App\Models\Owner');
+        return $this->belongsTo('App\Models\Owner');
     }
 
     public function getTypeAttribute()
