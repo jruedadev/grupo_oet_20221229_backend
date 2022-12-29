@@ -17,8 +17,7 @@ class OwnerController extends BaseController
      */
     public function index(Request $request)
     {
-        $per_page = ($request->per_page) ? $request->per_page : 15;
-        return $this->sendResponse(Owner::paginate($per_page), "Owners per page Obtained successfully");
+        return response()->json(Owner::all(), 200);
     }
 
     /**

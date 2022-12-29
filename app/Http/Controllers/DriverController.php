@@ -17,8 +17,7 @@ class DriverController extends BaseController
      */
     public function index(Request $request)
     {
-        $per_page = ($request->per_page) ? $request->per_page : 15;
-        return $this->sendResponse(Driver::paginate($per_page), "Drivers per page Obtained successfully");
+        return response()->json(Driver::all(), 200);
     }
 
     /**
