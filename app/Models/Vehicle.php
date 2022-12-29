@@ -24,6 +24,6 @@ class Vehicle extends Model
 
     public function getTypeAttribute()
     {
-        return ($this->type === "private") ? "Privado" : "Público";
+        return ($this->attributes['type'] === "private") ? "Privado" : "Público";
     }
 }
