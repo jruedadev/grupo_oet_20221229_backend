@@ -22,6 +22,11 @@ class Vehicle extends Model
         return $this->belongsTo('App\Models\Owner');
     }
 
+    public function drivers()
+    {
+        return $this->belongsToMany('App\Models\Driver');
+    }
+
     public function getTypeAttribute()
     {
         return ($this->attributes['type'] === "private") ? "Privado" : "Público";

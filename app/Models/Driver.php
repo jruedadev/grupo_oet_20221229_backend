@@ -19,4 +19,9 @@ class Driver extends Model
         'phone',
         'city',
     ];
+
+    public function vehicles()
+    {
+        return $this->belongsToMany('App\Models\Vehicle');
+    }
 }

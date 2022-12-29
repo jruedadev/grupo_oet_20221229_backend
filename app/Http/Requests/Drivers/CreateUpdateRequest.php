@@ -41,6 +41,9 @@ class CreateUpdateRequest extends FormRequest
             'address'           =>  'required|string|max:250',
             'phone'             =>  'required|string|max:20',
             'city'              =>  'required|string|max:100',
+
+            'vehicles'          =>  'nullable|array',
+            'vehicles.*'        =>  'nullable|numeric',
         ];
     }
 }
